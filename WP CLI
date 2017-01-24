@@ -1,0 +1,32 @@
+###Install
+
+cd '/var/www/wordpress'
+mkdir $1
+cd $1
+wp core download --locale=en_US
+wp core config --dbname=$1 --dbuser=root --dbpass=thanglt240392 --locale=en_US --extra-php <<PHP
+define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_LOG', true );
+PHP
+wp db create
+wp core install --url=wp/$1 --title=$1 --admin_user=admin --admin_password=admin123 --admin_email=lethanghsph@gmail.com
+cd "/var/www/wordpress/$1/wp-content/themes"
+git clone git@bitbucket.org:awethemes/$1.git
+chmod -R 777 "/var/www/wordpress/$1"
+cd "/var/www/wordpress/$1/wp-content/themes/$1"
+git checkout .
+wp theme activate $1
+wp plugin delete hello
+wp plugin delete akismet
+echo "Home url: http://wp/$1"
+echo "Admin url: http://wp/$1/wp-admin"
+
+
+#Uninstall
+
+cd "/var/www/wordpress/$1"
+wp db drop --yes
+rm -r "/var/www/wordpress/$1"
+
+
+
