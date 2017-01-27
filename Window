@@ -1,0 +1,23 @@
+Step 1:
+   Go to: /apache/conf/httpd.conf
+   Uncomment "Include conf/extra/httpd-vhosts.conf"
+Step 2:
+   Go to: /apache/conf/extra/httpd-vhosts.conf
+   Insert at the bottom:
+        <VirtualHost *:80>
+          ServerAdmin yii@gmail.com
+          DocumentRoot "C:\wamp\www\YII"
+          ServerName  yii
+          <Directory "C:\wamp\www\YII">
+              Options FollowSymLinks
+              AllowOverride All
+              DirectoryIndex index.php
+              Require all granted
+              Order deny,allow
+          </Directory>
+      </VirtualHost>
+Step 3:
+   Go to windows/system32/drivers/etc/hosts
+   Add 127.0.0.1 yourdomain.com at the bottom.
+Step 4:
+   Restart apache.
