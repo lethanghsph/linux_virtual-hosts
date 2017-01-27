@@ -3,17 +3,21 @@ Step 1:
    Uncomment "Include conf/extra/httpd-vhosts.conf"
 Step 2:
    Go to: /apache/conf/extra/httpd-vhosts.conf
-   Insert at the bottom:
-        <VirtualHost *:80>
-          ServerAdmin yii@gmail.com
-          DocumentRoot "C:\wamp\www\YII"
-          ServerName  yii
-          <Directory "C:\wamp\www\YII">
-              Options FollowSymLinks
+   Change content:
+      NameVirtualHost *:80
+      <VirtualHost *:80>
+          ServerName localhost
+          DocumentRoot C:/wamp/www/
+      </VirtualHost>
+      <VirtualHost *:80>
+          ServerName   wp
+          ServerAlias wp
+          DocumentRoot c:/wamp/www/wp
+          <Directory "c:/wamp/www/wp">
+              Options Indexes FollowSymLinks MultiViews ExecCGI
               AllowOverride All
-              DirectoryIndex index.php
-              Require all granted
-              Order deny,allow
+              Order allow,deny
+              Allow from all
           </Directory>
       </VirtualHost>
 Step 3:
